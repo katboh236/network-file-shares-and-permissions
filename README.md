@@ -15,6 +15,14 @@ In this tutorial, we observe various network traffic to and from Azure Virtual M
 
 - Windows 10</b> (21H2)
 
+<h2>High-Level Deployment and Configuration Steps</h2>
+
+- Setup Resources in Microsoft Azure
+- Create two Virtual Machines in the same VNET DNS Server (Domain Controller and Client)
+- Ensure connectivity between the Client and Domain Controller
+- Install Active Directory and set up a new forest as mydomain.com
+
+<h2>Deployment and Configuration Steps</h2>
 </p>
 <p>
 In this lab we will be settingup shared network files & permissions. We will create folders in the DC-1 VM and share them on the network certain files will have certain permissions. Only designated people will be able to view certain files. Lets get started. First go to the c:/ drive on the DC-1 machine and create 4 folders. "read-access" "read/write-access" "no-access" and "accounting".
