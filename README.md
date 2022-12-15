@@ -15,12 +15,16 @@ In this tutorial, we observe various network traffic to and from Azure Virtual M
 
 - Windows 10</b> (21H2)
 
+<h2>List of Prerequisites</h2>
+
+- Active Directory running i Azure on a Virtual Machine (DC-1 - Domain Controller)
+- Client Machine running in Azure on a Virtual Machine (Client-1) and joined to the domain
+
 <h2>High-Level Deployment and Configuration Steps</h2>
 
-- Setup Resources in Microsoft Azure
-- Create two Virtual Machines in the same VNET DNS Server (Domain Controller and Client)
-- Ensure connectivity between the Client and Domain Controller
-- Install Active Directory and set up a new forest as mydomain.com
+- Create Sample File Shares with Various Permissions
+- Attempt to Access File Shares as a Normal User
+- Create "ACCOUNTANTS" Security Group, Assign Permissions, and Test Access
 
 <h2>Deployment and Configuration Steps</h2>
 </p>
