@@ -3,7 +3,7 @@
 </p>
 
 <h1>Network-File-Shares-and-Permissions</h1>
-In this tutorial, we observe various network traffic to and from Azure Virtual Machines with Wireshark as well as experiment with Network Security Groups. <br />
+In this tutorial, we observe various network traffic to and from Azure Virtual Machines with Wireshark as well as experiment with Network Security Groups. We will create folders in the DC-1 VM and share them on the network. Only designated people will be able to view certain files and certain files will have certain permissions. <br />
 
 <h2>Environments and Technologies Used</h2>
 
@@ -29,14 +29,50 @@ In this tutorial, we observe various network traffic to and from Azure Virtual M
 <h2>Deployment and Configuration Steps</h2>
 </p>
 <p>
-In this lab we will be settingup shared network files & permissions. We will create folders in the DC-1 VM and share them on the network certain files will have certain permissions. Only designated people will be able to view certain files. Lets get started. First go to the c:/ drive on the DC-1 machine and create 4 folders. "read-access" "read/write-access" "no-access" and "accounting".
+<img src="https://imgur.com/TMLtHLZ.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+</p>
+<p>
+Connected into DC-1 as domain admin account (mydomain.com\jane_admin), connected into Client-1 as a normal user - buda.hes. On DC-1, on the C:\ drive, created 4 folders: "read-access", "write-access", "no-access", "accounting".
 </p>
 <br />
-
 <p>
-<img src="https://i.imgur.com/k70dozS.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://imgur.com/BzjhPv1.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 </p>
 <p>
-After the fodlers have been created what you want to do is share them on the network so that the client-1 machine can view them. We can also set the permissions of the folders in DC-1. Set the folders to the appropriate permissions. "read-access" should be read only for domain users, "read/write access" shuld have read/write permissions for domain users. Lastly "no-access" should have read/write permissions for domain admins only.
+Set up following permissions for the "Domain Users" group: folder: "read-access" => group: "Domain users" => permission: "Read"; folder: "write-access" => group: "Domain Users" => permissions: "Read/Write"; folder: "no-access" => group: "Domain Admins" => permissions: "Read/Write".
+</p>
+<br />
+<p>
+<img src="https://imgur.com/C9ff8Zr.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+</p>
+<p>
+On Client-1, navigated to the shared folder (start, run, \\dc-1). Tried to access folders to see how permissions work.
+</p>
+<br />
+<p>
+<img src="https://imgur.com/5kqkRWW.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+</p>
+<p>
+<img src="https://imgur.com/vApYZrU.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+</p>
+<p>
+On DC-1, in ACtive Directory, created Security Group called "ACCOUNTANTS". On the "accounting" folder created earlier, set following permissions: folder: "accounting" => group: "ACCOUNTANTS" => permissions: "Read/Write". 
+</p>
+<br />
+<p>
+<img src="https://imgur.com/OZn7Ics.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+</p>
+<p>
+On Client-1, as <buda.hes> user tried to access the "ACCOUNTANTS" folder and it failed as log out of Client-1 is needed.
+</p>
+<br />
+<p>
+<img src="https://imgur.com/fbeHmWt.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+</p>
+<p>
+<img src="https://imgur.com/ji62yUD.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+</p>
+<p>
+On DC-1, made "buda.hes> user a member of the "ACCOUNTANTS" Security Group, signed back to Client-1 as <buda.hes>, tried to access the "accounting" share in \\dc-1 and it worked. Success!
 </p>
 <br />
